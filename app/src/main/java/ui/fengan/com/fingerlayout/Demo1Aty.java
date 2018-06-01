@@ -4,22 +4,27 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebView;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
 
 public class Demo1Aty extends AppCompatActivity {
     private int fadeIn = R.anim.fade_in;
     private int fadeOut = R.anim.fade_out;
+    private final String url = "http://fenganblogimgs.oss-cn-beijing.aliyuncs.com/blog/bwnwb.jpg";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_demo1_aty);
         FingerViewGroup adFingerViewGroup = findViewById(R.id.ad_finger_vg);
-        TextView textView = findViewById(R.id.tv);
-        textView.setOnClickListener(new View.OnClickListener() {
+        final ImageView imageView = findViewById(R.id.iv);
+        imageView.post(new Runnable() {
             @Override
-            public void onClick(View v) {
-                Toast.makeText(Demo1Aty.this,"click",Toast.LENGTH_SHORT).show();
+            public void run() {
+                Glide.with(Demo1Aty.this).load(url).asBitmap().into(imageView);
             }
         });
         adFingerViewGroup.setOnAlphaChangeListener(new FingerViewGroup.onAlphaChangedListener() {
